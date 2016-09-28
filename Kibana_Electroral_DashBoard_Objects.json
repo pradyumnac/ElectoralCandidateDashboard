@@ -1,0 +1,116 @@
+[
+  {
+    "_id": "ElectoralCandidates",
+    "_type": "dashboard",
+    "_source": {
+      "title": "ElectoralCandidates",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"col\":4,\"id\":\"ModiSentimentPie\",\"panelIndex\":1,\"row\":3,\"size_x\":3,\"size_y\":2,\"type\":\"visualization\"},{\"col\":4,\"id\":\"ObamaSentimentPie\",\"panelIndex\":2,\"row\":1,\"size_x\":3,\"size_y\":2,\"type\":\"visualization\"},{\"col\":7,\"id\":\"TrumpSentimentPie\",\"panelIndex\":3,\"row\":3,\"size_x\":3,\"size_y\":2,\"type\":\"visualization\"},{\"col\":7,\"id\":\"ClintonSentimentPie\",\"panelIndex\":4,\"row\":1,\"size_x\":3,\"size_y\":2,\"type\":\"visualization\"}]",
+      "optionsJSON": "{\"darkTheme\":false}",
+      "uiStateJSON": "{\"P-1\":{\"spy\":{\"mode\":{\"name\":null,\"fill\":false}}}}",
+      "version": 1,
+      "timeRestore": true,
+      "timeTo": "now",
+      "timeFrom": "now-15m",
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "TweetAnalysis",
+    "_type": "search",
+    "_source": {
+      "title": "TweetAnalysis",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "author",
+        "sentiment",
+        "subjectivity",
+        "date",
+        "polarity",
+        "message"
+      ],
+      "sort": [
+        "_score",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"sentiment*\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[],\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647}}"
+      }
+    }
+  },
+  {
+    "_id": "SentimentPie",
+    "_type": "visualization",
+    "_source": {
+      "title": "SentimentPie",
+      "visState": "{\"title\":\"SentimentPie\",\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":true},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Polarity\"}},{\"id\":\"2\",\"type\":\"range\",\"schema\":\"segment\",\"params\":{\"field\":\"polarity\",\"ranges\":[{\"from\":-1,\"to\":-0.01},{\"from\":0.01,\"to\":1},{\"from\":-0.01,\"to\":0.01}],\"customLabel\":\"Polarity\"}},{\"id\":\"3\",\"type\":\"range\",\"schema\":\"segment\",\"params\":{\"field\":\"subjectivity\",\"ranges\":[{\"from\":0,\"to\":0.33},{\"from\":0.34,\"to\":0.66},{\"from\":0.67,\"to\":1}],\"customLabel\":\"Subjectivity\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{\"vis\":{\"colors\":{\"-1 to -0.01\":\"#E24D42\",\"0 to 0.33\":\"#CFFAFF\",\"0.01 to 1\":\"#508642\"},\"legendOpen\":true}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"sentiment*\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "TrumpSentimentPie",
+    "_type": "visualization",
+    "_source": {
+      "title": "TrumpSentimentPie",
+      "visState": "{\"aggs\":[{\"id\":\"1\",\"params\":{\"customLabel\":\"Polarity\"},\"schema\":\"metric\",\"type\":\"count\"},{\"id\":\"2\",\"params\":{\"customLabel\":\"Polarity\",\"field\":\"polarity\",\"ranges\":[{\"from\":-1,\"to\":-0.01},{\"from\":0.01,\"to\":1}]},\"schema\":\"segment\",\"type\":\"range\"},{\"id\":\"3\",\"params\":{\"customLabel\":\"Subjectivity\",\"field\":\"subjectivity\",\"ranges\":[{\"from\":0,\"to\":0.33},{\"from\":0.34,\"to\":0.66},{\"from\":0.67,\"to\":1}]},\"schema\":\"segment\",\"type\":\"range\"}],\"listeners\":{},\"params\":{\"addLegend\":true,\"addTooltip\":true,\"isDonut\":true,\"shareYAxis\":true},\"title\":\"TrumpSentimentPie\",\"type\":\"pie\"}",
+      "uiStateJSON": "{\"vis\":{\"colors\":{\"-1 to -0.01\":\"#E24D42\",\"0 to 0.33\":\"#CFFAFF\",\"0.01 to 1\":\"#508642\",\"0.34 to 0.66\":\"#6ED0E0\",\"0.67 to 1\":\"#447EBC\"},\"legendOpen\":true}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"sentiment*\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*trump*\"}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "ClintonSentimentPie",
+    "_type": "visualization",
+    "_source": {
+      "title": "ClintonSentimentPie",
+      "visState": "{\"title\":\"ClintonSentimentPie\",\"type\":\"pie\",\"params\":{\"addLegend\":true,\"addTooltip\":true,\"isDonut\":true,\"shareYAxis\":true},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Polarity\"}},{\"id\":\"2\",\"type\":\"range\",\"schema\":\"segment\",\"params\":{\"field\":\"polarity\",\"ranges\":[{\"from\":-1,\"to\":-0.01},{\"from\":0.01,\"to\":1}],\"customLabel\":\"Polarity\"}},{\"id\":\"3\",\"type\":\"range\",\"schema\":\"segment\",\"params\":{\"field\":\"subjectivity\",\"ranges\":[{\"from\":0,\"to\":0.33},{\"from\":0.34,\"to\":0.66},{\"from\":0.67,\"to\":1}],\"customLabel\":\"Subjectivity\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{\"vis\":{\"colors\":{\"-1 to -0.01\":\"#E24D42\",\"0 to 0.33\":\"#CFFAFF\",\"0.01 to 1\":\"#508642\",\"0.34 to 0.66\":\"#6ED0E0\",\"0.67 to 1\":\"#447EBC\"},\"legendOpen\":true}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"sentiment*\",\"query\":{\"query_string\":{\"query\":\"*Clinton*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "ModiSentimentPie",
+    "_type": "visualization",
+    "_source": {
+      "title": "ModiSentimentPie",
+      "visState": "{\"title\":\"ModiSentimentPie\",\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":true},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Polarity\"}},{\"id\":\"2\",\"type\":\"range\",\"schema\":\"segment\",\"params\":{\"field\":\"polarity\",\"ranges\":[{\"from\":-1,\"to\":-0.01},{\"from\":0.01,\"to\":1}],\"customLabel\":\"Polarity\"}},{\"id\":\"3\",\"type\":\"range\",\"schema\":\"segment\",\"params\":{\"field\":\"subjectivity\",\"ranges\":[{\"from\":0,\"to\":0.33},{\"from\":0.34,\"to\":0.66},{\"from\":0.67,\"to\":1}],\"customLabel\":\"Subjectivity\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{\"vis\":{\"colors\":{\"-1 to -0.01\":\"#E24D42\",\"0 to 0.33\":\"#CFFAFF\",\"0.01 to 1\":\"#508642\",\"0.34 to 0.66\":\"#6ED0E0\",\"0.67 to 1\":\"#447EBC\"},\"legendOpen\":true}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"sentiment*\",\"query\":{\"query_string\":{\"query\":\"*modi*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "ObamaSentimentPie",
+    "_type": "visualization",
+    "_source": {
+      "title": "ObamaSentimentPie",
+      "visState": "{\"title\":\"ObamaSentimentPie\",\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":true},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Polarity\"}},{\"id\":\"2\",\"type\":\"range\",\"schema\":\"segment\",\"params\":{\"field\":\"polarity\",\"ranges\":[{\"from\":-1,\"to\":-0.01},{\"from\":0.01,\"to\":1}],\"customLabel\":\"Polarity\"}},{\"id\":\"3\",\"type\":\"range\",\"schema\":\"segment\",\"params\":{\"field\":\"subjectivity\",\"ranges\":[{\"from\":0,\"to\":0.33},{\"from\":0.34,\"to\":0.66},{\"from\":0.67,\"to\":1}],\"customLabel\":\"Subjectivity\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{\"vis\":{\"colors\":{\"-1 to -0.01\":\"#E24D42\",\"0 to 0.33\":\"#CFFAFF\",\"0.01 to 1\":\"#508642\",\"0.34 to 0.66\":\"#6ED0E0\",\"0.67 to 1\":\"#447EBC\"},\"legendOpen\":true}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"sentiment*\",\"query\":{\"query_string\":{\"query\":\"*Obama*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  }
+]
